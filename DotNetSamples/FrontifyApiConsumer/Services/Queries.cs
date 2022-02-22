@@ -14,18 +14,18 @@ namespace FrontifyApiConsumer.Services
 {
     public class Queries
     {
-        readonly GraphQLHttpClient _graphQLHttpClient;
+        readonly GraphQLHttpClient _httpClient;
 
         public Queries()
         {
-            var graphQLHttpClientOptions = new GraphQLHttpClientOptions
+            var options = new GraphQLHttpClientOptions
             {
                 EndPoint = new Uri("https://echo.wsa.com/graphql", UriKind.Absolute),
             };
 
-            _graphQLHttpClient = new GraphQLHttpClient(graphQLHttpClientOptions, new NewtonsoftJsonSerializer());
-            _graphQLHttpClient.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _graphQLHttpClient.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer FJLJkMJQZSrwV8ckfXzk7MhFPw7MRaZL88GQn46i");
+            _httpClient = new GraphQLHttpClient(options, new NewtonsoftJsonSerializer());
+            _httpClient.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer FJLJkMJQZSrwV8ckfXzk7MhFPw7MRaZL88GQn46i");
         }
 
         public async Task<GraphQLResponse<ProjectAssets>> GetAllAssetsAsync(int pageIndex, int limitValue)
@@ -38,7 +38,7 @@ namespace FrontifyApiConsumer.Services
                     Query = Constants.Queries.ProjectAssets
                 };
 
-                graphQLResponse = await _graphQLHttpClient.SendQueryAsync<ProjectAssets>(request);
+                graphQLResponse = await _httpClient.SendQueryAsync<ProjectAssets>(request);
             }
             catch (Exception ex)
             {

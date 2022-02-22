@@ -11,18 +11,18 @@ namespace FrontifyApiConsumer.Services
 {
     public class Commands
     {
-        readonly GraphQLHttpClient _graphQLHttpClient;
+        readonly GraphQLHttpClient _httpClient;
 
         public Commands()
         {
-            var graphQLHttpClientOptions = new GraphQLHttpClientOptions
+            var options = new GraphQLHttpClientOptions
             {
                 EndPoint = new Uri("https://echo.wsa.com/graphql", UriKind.Absolute),
             };
 
-            _graphQLHttpClient = new GraphQLHttpClient(graphQLHttpClientOptions, new NewtonsoftJsonSerializer());
-            _graphQLHttpClient.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _graphQLHttpClient.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer FJLJkMJQZSrwV8ckfXzk7MhFPw7MRaZL88GQn46i");
+            _httpClient = new GraphQLHttpClient(options, new NewtonsoftJsonSerializer());
+            _httpClient.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer FJLJkMJQZSrwV8ckfXzk7MhFPw7MRaZL88GQn46i");
         }
     }
 }
