@@ -28,9 +28,9 @@ namespace FrontifyApiConsumer.Services
             _httpClient.HttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer FJLJkMJQZSrwV8ckfXzk7MhFPw7MRaZL88GQn46i");
         }
 
-        public async Task<GraphQLResponse<ProjectAssets>> GetAllAssetsAsync(int pageIndex, int limitValue)
+        public async Task<GraphQLResponse<ProjectAssets>> GetAssetsAsync(int pageIndex, int limitValue)
         {
-            GraphQLResponse<ProjectAssets> graphQLResponse = null;
+            GraphQLResponse<ProjectAssets> response = null;
             try
             {
                 var request = new GraphQLRequest
@@ -38,13 +38,13 @@ namespace FrontifyApiConsumer.Services
                     Query = Constants.Queries.ProjectAssets
                 };
 
-                graphQLResponse = await _httpClient.SendQueryAsync<ProjectAssets>(request);
+                response = await _httpClient.SendQueryAsync<ProjectAssets>(request);
             }
             catch (Exception ex)
             {
             }
 
-            return graphQLResponse;
+            return response;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace FrontifyApiConsumer.Common
 {
     public static class Constants
     {
+        public const string ApprovedLibraryId = "eyJpZGVudGlmaWVyIjoxNDIsInR5cGUiOiJwcm9qZWN0In0=";
+
         public static class Queries
         {
             public const string ProjectAssets = @"
