@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontifyApiConsumer", "FrontifyApiConsumer\FrontifyApiConsumer.csproj", "{E9669B7F-C447-49DC-80C2-E78FB3FF968B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontifyApiConsumer", "FrontifyApiConsumer\FrontifyApiConsumer.csproj", "{E9669B7F-C447-49DC-80C2-E78FB3FF968B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
