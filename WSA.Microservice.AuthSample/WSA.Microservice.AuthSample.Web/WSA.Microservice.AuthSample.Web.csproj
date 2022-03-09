@@ -19,11 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WSA.Microservice.AuthSample.Application\WSA.Microservice.AuthSample.Application.csproj" />
-    <ProjectReference Include="..\WSA.Microservice.AuthSample.Infrastructure.Persistence\WSA.Microservice.AuthSample.Infrastructure.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="appsettings.Development.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

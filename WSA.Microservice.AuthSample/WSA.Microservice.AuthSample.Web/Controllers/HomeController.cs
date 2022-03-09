@@ -22,6 +22,8 @@ namespace WSA.Microservice.AuthSample.Web.Controllers
 
         public IActionResult Privacy()
         {
+            var user = User;
+
             return View();
         }
 

@@ -5,23 +5,9 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{3D7959F3-A28D-4CCA-AF82-70814907CF9C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1D5DAA2B-9626-4B9F-AFA9-2427DEC92B11}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSA.Microservice.AuthSample.Domain", "WSA.Microservice.AuthSample.Domain\WSA.Microservice.AuthSample.Domain.csproj", "{56D7538C-DC35-424B-8744-F72E2384EFDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSA.Microservice.AuthSample.Application", "WSA.Microservice.AuthSample.Application\WSA.Microservice.AuthSample.Application.csproj", "{1A917CC0-4583-48F4-B90A-297F3C0ACF25}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A0ACE8A0-B6DF-4D8E-B517-9957F660180E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSA.Microservice.AuthSample.Infrastructure.Persistence", "WSA.Microservice.AuthSample.Infrastructure.Persistence\WSA.Microservice.AuthSample.Infrastructure.Persistence.csproj", "{EA9EB994-3EDE-43B2-A93F-690EBD8FA991}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{78E81CB9-056B-4148-8F20-C75C8D4259EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSA.Microservice.AuthSample.Web", "WSA.Microservice.AuthSample.Web\WSA.Microservice.AuthSample.Web.csproj", "{04A43AC7-148F-4B94-B742-6B6F90406BFB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebJobs", "WebJobs", "{77F4F49C-4779-4993-BC83-96226A22A57E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSA.Microservice.AuthSample.WebJob.InboundProcess", "WSA.Microservice.AuthSample.WebJob.InboundProcess\WSA.Microservice.AuthSample.WebJob.InboundProcess.csproj", "{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSA.Microservice.AuthSample.Web", "WSA.Microservice.AuthSample.Web\WSA.Microservice.AuthSample.Web.csproj", "{04A43AC7-148F-4B94-B742-6B6F90406BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,40 +15,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56D7538C-DC35-424B-8744-F72E2384EFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56D7538C-DC35-424B-8744-F72E2384EFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56D7538C-DC35-424B-8744-F72E2384EFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56D7538C-DC35-424B-8744-F72E2384EFDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A917CC0-4583-48F4-B90A-297F3C0ACF25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A917CC0-4583-48F4-B90A-297F3C0ACF25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A917CC0-4583-48F4-B90A-297F3C0ACF25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A917CC0-4583-48F4-B90A-297F3C0ACF25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA9EB994-3EDE-43B2-A93F-690EBD8FA991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA9EB994-3EDE-43B2-A93F-690EBD8FA991}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA9EB994-3EDE-43B2-A93F-690EBD8FA991}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA9EB994-3EDE-43B2-A93F-690EBD8FA991}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04A43AC7-148F-4B94-B742-6B6F90406BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04A43AC7-148F-4B94-B742-6B6F90406BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A43AC7-148F-4B94-B742-6B6F90406BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A43AC7-148F-4B94-B742-6B6F90406BFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1D5DAA2B-9626-4B9F-AFA9-2427DEC92B11} = {3D7959F3-A28D-4CCA-AF82-70814907CF9C}
-		{56D7538C-DC35-424B-8744-F72E2384EFDC} = {1D5DAA2B-9626-4B9F-AFA9-2427DEC92B11}
-		{1A917CC0-4583-48F4-B90A-297F3C0ACF25} = {1D5DAA2B-9626-4B9F-AFA9-2427DEC92B11}
-		{A0ACE8A0-B6DF-4D8E-B517-9957F660180E} = {3D7959F3-A28D-4CCA-AF82-70814907CF9C}
-		{EA9EB994-3EDE-43B2-A93F-690EBD8FA991} = {A0ACE8A0-B6DF-4D8E-B517-9957F660180E}
 		{78E81CB9-056B-4148-8F20-C75C8D4259EC} = {3D7959F3-A28D-4CCA-AF82-70814907CF9C}
 		{04A43AC7-148F-4B94-B742-6B6F90406BFB} = {78E81CB9-056B-4148-8F20-C75C8D4259EC}
-		{77F4F49C-4779-4993-BC83-96226A22A57E} = {3D7959F3-A28D-4CCA-AF82-70814907CF9C}
-		{1CF42DB0-6AA1-42B2-B49C-D2B76822C7D0} = {77F4F49C-4779-4993-BC83-96226A22A57E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2AE749A0-3D06-4B27-B396-3FAAC9C54818}

@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using System.Security.Claims;
-using WSA.Microservice.AuthSample.Application;
-using WSA.Microservice.AuthSample.Infrastructure.Persistence;
 using WSA.Microservice.AuthSample.Web.Auth;
 using WSA.Microservice.AuthSample.Web.Extensions;
 using WSA.Microservice.AuthSample.Web.Logger;
@@ -44,8 +42,6 @@ void ConfigureConfiguration(WebApplicationBuilder builder)
 
 void ConfigureServices(IServiceCollection services, ConfigurationManager configuration)
 {
-    services.AddApplicationServices();
-    services.AddPersistenceServices(configuration);
 
     services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer(configuration.GetValue<string>("appInsights:WebApp:CloudRoleName")));
 

@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Text.Json;
-using WSA.Microservice.AuthSample.Application.Common.Exceptions;
-using WSA.Microservice.AuthSample.Application.Common.Wrappers;
 
 namespace WSA.Microservice.AuthSample.Web.Middlewares
 {
@@ -24,17 +22,10 @@ namespace WSA.Microservice.AuthSample.Web.Middlewares
             {
                 var response = context.Response;
                 response.ContentType = "application/json";
-                var responseModel = new Response<string>() { Succeeded = false, Message = error?.Message };
+                //var responseModel = new Response<string>() { Succeeded = false, Message = error?.Message };
 
                 switch (error)
                 {
-                    case Application.Common.Exceptions.ApiException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        break;
-                    case ValidationException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        responseModel.Errors = e.Errors;
-                        break;
                     case KeyNotFoundException e:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
@@ -45,9 +36,9 @@ namespace WSA.Microservice.AuthSample.Web.Middlewares
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
                 }
-                var result = JsonSerializer.Serialize(responseModel);
+                //var result = JsonSerializer.Serialize(null);
 
-                await response.WriteAsync(result);
+                await response.WriteAsync("");
             }
         }
     }
