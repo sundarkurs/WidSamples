@@ -7,7 +7,7 @@ namespace MultiThreadSample
     {
         public static void PrimeStart()
         {
-            var limit = 1000;
+            var limit = 500;
             var numbers = Enumerable.Range(0, limit).ToList();
 
             var primeService = new PrimeService();

@@ -20,27 +20,32 @@ namespace MultiThreadSample.Services
                     primeNumbers.Add(number);
                 }
             });
-            
+
             return primeNumbers.ToList();
         }
 
         public async Task<bool> IsPrime(int number)
         {
-            Console.WriteLine(number);
+            Console.WriteLine($"{number} - Start - {DateTime.Now.ToLongTimeString()}");
+            bool result = true;
+
             Thread.Sleep(1000);
+
             if (number < 2)
             {
-                return false;
+                result = false;
             }
 
             for (var divisor = 2; divisor <= Math.Sqrt(number); divisor++)
             {
                 if (number % divisor == 0)
                 {
-                    return false;
+                    result = false;
                 }
             }
-            return true;
+
+            Console.WriteLine($"{number} - End - {DateTime.Now.ToLongTimeString()}");
+            return result;
         }
     }
 }
