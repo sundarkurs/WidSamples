@@ -21,6 +21,11 @@ namespace MultiThreadSample.Services
                 }
             });
 
+            foreach(var n in primeNumbers)
+            {
+                Console.WriteLine(n);
+            }
+
             return primeNumbers.ToList();
         }
 
