@@ -113,7 +113,7 @@ namespace AgileServicesIntegration
 
                 var documentFields = new List<FieldCollectionTableFieldCollectionField>() {
                     new FieldCollectionTableFieldCollectionField {
-                        Name = XMLFieldConstants.DocumentId,
+                        Name = XMLFieldConstants.DocumentName,
                         Value = documentPlaceholderModel.DocumentId
                     },
                     new FieldCollectionTableFieldCollectionField {
@@ -153,6 +153,11 @@ namespace AgileServicesIntegration
                 {
                     Name = XMLFieldConstants.FilePathName,
                     Value = XMLFieldConstants.FilePathValue,
+                },
+                new FieldCollectionTableFieldCollectionField
+                {
+                    Name = XMLFieldConstants.StepSystem,
+                    Value = XMLFieldConstants.StepSystemValue,
                 },
                 new FieldCollectionTableFieldCollectionField
                 {
