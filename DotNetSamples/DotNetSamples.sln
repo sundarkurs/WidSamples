@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgileServicesIntegration", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocCenterSample", "DocCenterSample\DocCenterSample.csproj", "{1F5332E9-39ED-4898-B47A-BC9822ED7FDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainEventsUpdate", "DomainEventsUpdate\DomainEventsUpdate.csproj", "{C9DC631B-60A7-4EC5-A59A-CAAC58BC987C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1F5332E9-39ED-4898-B47A-BC9822ED7FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F5332E9-39ED-4898-B47A-BC9822ED7FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F5332E9-39ED-4898-B47A-BC9822ED7FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9DC631B-60A7-4EC5-A59A-CAAC58BC987C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DC631B-60A7-4EC5-A59A-CAAC58BC987C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DC631B-60A7-4EC5-A59A-CAAC58BC987C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DC631B-60A7-4EC5-A59A-CAAC58BC987C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
