@@ -1,6 +1,8 @@
 ﻿using DomainEventsUpdate.Model;
+using DomainEventsUpdate.Services;
 using System;
 using System.Linq;
+
 
 namespace DomainEventsUpdate
 {
@@ -8,14 +10,12 @@ namespace DomainEventsUpdate
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Start");
 
-            using (var context = new tstmsplmwsasdbContext())
-            {
-                var brand = context.Brands.FirstOrDefault();
+            var updateBrandIdService = new UpdateDomainEventBrandIdService();
+            updateBrandIdService.UpdateBrandId();
 
-            }
-
+            Console.Read();
         }
     }
 }
