@@ -19,5 +19,6 @@ namespace DomainEventsUpdate.Model
         public string EntityVersion { get; set; }
         public bool IsEarlyExtract { get; set; }
         public string BrandId { get; set; }
+        public string PermanentKey { get; set; }
     }
 }
