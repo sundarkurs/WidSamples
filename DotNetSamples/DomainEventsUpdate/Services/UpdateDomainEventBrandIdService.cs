@@ -29,8 +29,9 @@ namespace DomainEventsUpdate.Services
                         {
                             brandId = permanentKey.Split('_')[0];
 
-                            if (domainEvent.BrandId != brandId)
+                            if (domainEvent.PermanentKey != permanentKey)
                             {
+                                domainEvent.PermanentKey = permanentKey;
                                 domainEvent.BrandId = brandId;
                                 UpdateEvent(domainEvent);
                             }
