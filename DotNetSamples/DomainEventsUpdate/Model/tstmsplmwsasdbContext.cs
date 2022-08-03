@@ -33,6 +33,7 @@ namespace DomainEventsUpdate.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
+
                 
             }
         }
@@ -222,7 +223,7 @@ namespace DomainEventsUpdate.Model
                 entity.Property(e => e.EntityVersion).HasMaxLength(50);
 
                 entity.Property(e => e.PermanentKey)
-                    .HasMaxLength(100)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TimestampUtc).HasColumnType("datetime");

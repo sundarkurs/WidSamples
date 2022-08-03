@@ -1,6 +1,7 @@
 ﻿using DomainEventsUpdate.Model;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DomainEventsUpdate.Services
@@ -15,32 +16,45 @@ namespace DomainEventsUpdate.Services
         {
             using (tstmsplmwsasdbContext context = new tstmsplmwsasdbContext())
             {
-                IQueryable<DomainEvent> queryableEvents = context.DomainEvents.Select(x => x).Where(c => c.BrandId == null);
+                int skip = 0;
+                int take = 100;
 
-                foreach (var domainEvent in queryableEvents)
+                //IQueryable<DomainEvent> queryableEvents = context.DomainEvents.Select(x => x).Where(c => c.PermanentKey == null);
+                List<DomainEvent> domainEvents = context.DomainEvents.Select(x => x).OrderBy(o => o.Id).Skip(skip).Take(take).ToList();
+
+                while (domainEvents.Count > 0)
                 {
-                    try
+                    foreach (var domainEvent in domainEvents)
                     {
-                        dynamic data = JsonConvert.DeserializeObject(domainEvent.Payload);
-                        string permanentKey = Convert.ToString(data.State.PermanentKey);
-                        string brandId = string.Empty;
-
-                        if (!string.IsNullOrEmpty(permanentKey))
+                        try
                         {
-                            brandId = permanentKey.Split('_')[0];
+                            dynamic data = JsonConvert.DeserializeObject(domainEvent.Payload);
+                            string permanentKey = Convert.ToString(data.State.PermanentKey);
+                            string brandId = string.Empty;
 
-                            if (domainEvent.PermanentKey != permanentKey)
+                            if (!string.IsNullOrEmpty(permanentKey))
                             {
-                                domainEvent.PermanentKey = permanentKey;
-                                domainEvent.BrandId = brandId;
-                                UpdateEvent(domainEvent);
-                            }
-                        }
+                                brandId = permanentKey.Split('_')[0];
 
-                        Console.WriteLine($"Permanent Key: {permanentKey}, BrandId: {brandId}\n");
+                                if (domainEvent.PermanentKey != permanentKey)
+                                {
+                                    domainEvent.PermanentKey = permanentKey;
+                                    domainEvent.BrandId = brandId;
+                                    UpdateEvent(domainEvent);
+                                }
+                            }
+
+                            skip = domainEvent.Id;
+
+                            Console.WriteLine($"Id: {domainEvent.Id}, Permanent Key: {permanentKey}, BrandId: {brandId}\n");
+                        }
+                        catch (Exception) { }
                     }
-                    catch (Exception) { }
+
+                    domainEvents.Clear();
+                    domainEvents = context.DomainEvents.Select(x => x).OrderBy(o => o.Id).Skip(skip).Take(take).ToList();
                 }
+
 
             }
 
