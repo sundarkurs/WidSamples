@@ -1,13 +1,8 @@
-﻿using FrontifyWebhookHandler.Models;
-using Microsoft.AspNetCore.Http;
+﻿using FrontifyWebhookHandler.Model;
+using FrontifyWebhookHandler.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FrontifyWebhookHandler.Controllers
@@ -47,9 +42,28 @@ namespace FrontifyWebhookHandler.Controllers
             {
                 return BadRequest();
             }
+
+            AddEvent(request, bodyText);
+
             return Ok(request.@event.action);
         }
 
+        public void AddEvent(Root request, string body)
+        {
+            //string jsonString = JsonConvert.SerializeObject(request);
+
+            var ev = new FrontifyWebhookEvent();
+            ev.Action = request.@event.action;
+            ev.OccurredAt = request.@event.occurredAt;
+            ev.ProcessedAt = request.@event.processedAt;
+            ev.Payload = body;
+
+            using (tstmstemplatesdbContext context = new tstmstemplatesdbContext())
+            {
+                context.FrontifyWebhookEvents.Add(ev);
+                context.SaveChanges();
+            }
+        }
 
 
         //[HttpPost]
