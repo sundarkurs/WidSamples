@@ -1,10 +1,13 @@
 ﻿using FrontifyWebhookHandler.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FrontifyWebhookHandler.Controllers
@@ -32,15 +35,33 @@ namespace FrontifyWebhookHandler.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Root input)
+        public async Task<IActionResult> Post()
         {
-            if (input == null)
+            var bodyText = await Request.GetRawBodyAsync();
+
+            Root request = JsonConvert.DeserializeObject<Root>(bodyText);
+
+            var headers = Request.Headers;
+
+            if (request == null)
             {
                 return BadRequest();
             }
-
-            //Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(input);
-            return Ok(input.@event.action);
+            return Ok(request.@event.action);
         }
+
+
+
+        //[HttpPost]
+        //public IActionResult PostRaw([FromBody] string input)
+        //{
+        //    if (input == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    Root request = JsonConvert.DeserializeObject<Root>(input);
+        //    return Ok(request.@event.action);
+        //}
     }
 }
