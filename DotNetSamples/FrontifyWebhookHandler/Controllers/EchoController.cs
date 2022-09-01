@@ -3,6 +3,9 @@ using FrontifyWebhookHandler.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FrontifyWebhookHandler.Controllers
@@ -32,20 +35,26 @@ namespace FrontifyWebhookHandler.Controllers
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            var bodyText = await Request.GetRawBodyAsync();
+            var eventPayload = await Request.GetRawBodyAsync();
+            Root eventObject = JsonConvert.DeserializeObject<Root>(eventPayload);
 
-            Root request = JsonConvert.DeserializeObject<Root>(bodyText);
+            var receivedSignature = Request.Headers["X-Frontify-Webhook-Signature"].ToString();
 
-            var headers = Request.Headers;
-
-            if (request == null)
+            if (eventObject == null)
             {
                 return BadRequest();
             }
 
-            AddEvent(request, bodyText);
+            var calculatedSignature = GetCalculatedSignature(eventPayload);
 
-            return Ok(request.@event.action);
+            if (calculatedSignature != receivedSignature)
+            {
+                return BadRequest("Bad signature");
+            }
+
+            AddEvent(eventObject, eventPayload);
+
+            return Ok(eventObject.@event.action);
         }
 
         public void AddEvent(Root request, string body)
@@ -58,13 +67,24 @@ namespace FrontifyWebhookHandler.Controllers
             ev.ProcessedAt = request.@event.processedAt;
             ev.Payload = body;
 
-            using (tstmstemplatesdbContext context = new tstmstemplatesdbContext())
+            using (var context = new tstmstemplatesdbContext())
             {
                 context.FrontifyWebhookEvents.Add(ev);
                 context.SaveChanges();
             }
         }
 
+        public static String GetCalculatedSignature(String payload)
+        {
+            string webhookSecret = "TuxJmCYjSqkgsu4aU9sd6dZ6XSDeB1D9";
+
+            Encoding ascii = Encoding.ASCII;
+            HMACSHA256 hmac = new HMACSHA256(ascii.GetBytes(webhookSecret));
+
+            var calculatedSignature = Convert.ToBase64String(hmac.ComputeHash(ascii.GetBytes(payload)));
+
+            return calculatedSignature;
+        }
 
         //[HttpPost]
         //public IActionResult PostRaw([FromBody] string input)
