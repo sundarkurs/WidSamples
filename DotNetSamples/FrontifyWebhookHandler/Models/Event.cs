@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace FrontifyWebhookHandler.Models
 {
-
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-
     public class Root
     {
         public Event @event { get; set; }

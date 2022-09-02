@@ -14,11 +14,6 @@ namespace FrontifyWebhookHandler.Controllers
     [Route("[controller]")]
     public class EchoController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-           {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<EchoController> _logger;
 
         public EchoController(ILogger<EchoController> logger)
@@ -36,7 +31,7 @@ namespace FrontifyWebhookHandler.Controllers
         public async Task<IActionResult> Post()
         {
             var eventPayload = await Request.GetRawBodyAsync();
-            Root eventObject = JsonConvert.DeserializeObject<Root>(eventPayload);
+            var eventObject = JsonConvert.DeserializeObject<Root>(eventPayload);
 
             var receivedSignature = Request.Headers["X-Frontify-Webhook-Signature"].ToString();
 
@@ -45,57 +40,46 @@ namespace FrontifyWebhookHandler.Controllers
                 return BadRequest();
             }
 
-            var calculatedSignature = GetCalculatedSignature(eventPayload);
+            var calculatedSignature = CalculateSignature(eventPayload);
 
             if (calculatedSignature != receivedSignature)
             {
                 return BadRequest("Bad signature");
             }
 
-            AddEvent(eventObject, eventPayload);
+            StoreEvent(eventObject, eventPayload);
 
             return Ok(eventObject.@event.action);
         }
 
-        public void AddEvent(Root request, string body)
+        public void StoreEvent(Root request, string body)
         {
-            //string jsonString = JsonConvert.SerializeObject(request);
+            // Exclude ASSET_CREATE actions, because we are interested only on UPDATE AND DELETE
+            if (request.@event.action == EventActions.AssetCreated)
+            {
+                return;
+            }
 
-            var ev = new FrontifyWebhookEvent();
-            ev.Action = request.@event.action;
-            ev.OccurredAt = request.@event.occurredAt;
-            ev.ProcessedAt = request.@event.processedAt;
-            ev.Payload = body;
+            var webhookEvent = new FrontifyWebhookEvent();
+            webhookEvent.Action = request.@event.action;
+            webhookEvent.OccurredAt = request.@event.occurredAt;
+            webhookEvent.ProcessedAt = request.@event.processedAt;
+            webhookEvent.Payload = body;
 
             using (var context = new tstmstemplatesdbContext())
             {
-                context.FrontifyWebhookEvents.Add(ev);
+                context.FrontifyWebhookEvents.Add(webhookEvent);
                 context.SaveChanges();
             }
         }
 
-        public static String GetCalculatedSignature(String payload)
+        public String CalculateSignature(string payload)
         {
-            string webhookSecret = "TuxJmCYjSqkgsu4aU9sd6dZ6XSDeB1D9";
+            string webhookSecret = "H6dySN8wkgarw3tHkmGAL9KiB8utu7PB";
+            var ascii = Encoding.ASCII;
+            var hmac = new HMACSHA256(ascii.GetBytes(webhookSecret));
 
-            Encoding ascii = Encoding.ASCII;
-            HMACSHA256 hmac = new HMACSHA256(ascii.GetBytes(webhookSecret));
-
-            var calculatedSignature = Convert.ToBase64String(hmac.ComputeHash(ascii.GetBytes(payload)));
-
-            return calculatedSignature;
+            return Convert.ToBase64String(hmac.ComputeHash(ascii.GetBytes(payload)));
         }
-
-        //[HttpPost]
-        //public IActionResult PostRaw([FromBody] string input)
-        //{
-        //    if (input == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    Root request = JsonConvert.DeserializeObject<Root>(input);
-        //    return Ok(request.@event.action);
-        //}
     }
 }
